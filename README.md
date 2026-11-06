@@ -1,229 +1,273 @@
-# NETWORKWALKS-WK1-Cybersecurity-Lab-Setup
-# 🖥️ Cybersecurity & Pentesting Lab Setup
+# 🔐 Cybersecurity Lab Environment Setup
 
-**NetworkWalks | Week 1 | Tools: VirtualBox + Kali Linux**
+### Kali Linux Network Configuration and Connectivity Testing using Oracle VirtualBox
 
----
-
-📌 About This Project
-
-In this project I built a safe virtual hacking lab on my own laptop using
-VirtualBox and Kali Linux. Everything runs inside a virtual machine, so I can
-practise security tools without putting my real computer or my home network
-at risk.
-
-The lab runs on a private virtual network (a VirtualBox NAT Network), so I can
-add more machines later and use them as practice targets.
+**Created by:** Saloni Kakkar  
+**Program:** B.Tech – Computer Science and Engineering (Cybersecurity)  
+**Institution:** Lovely Professional University
 
 ---
 
- 🎯 What I Wanted to Achieve
+## 📌 Project Overview
 
-- Install VirtualBox on my laptop
-- Create a private NAT Network for the lab
-- Set up Kali Linux as a virtual machine
-- Give the Kali VM a fixed (static) IP address
-- Check that the network, internet and DNS all work
-- Save a snapshot so I can go back to a clean setup
-- Document every step with my own screenshots
+This project documents the setup of a Kali Linux virtual machine using Oracle VirtualBox and the configuration and verification of its network connection.
 
----
+The practical work included checking the virtual machine's network adapter, configuring a manual IPv4 address, viewing the routing table, checking DNS settings, and testing connectivity to the virtual gateway and an external IP address.
 
-## 🛡️ Why Build a Lab?
+All screenshots in this repository are from my own lab setup.
 
-A lab gives me a safe place to practise things like:
+## 🎯 Objectives
 
-- Network scanning and port scanning
-- Vulnerability checking
-- Packet analysis
-- Web security testing
-- Trying out security tools
+- Set up and run Kali Linux in Oracle VirtualBox.
+- Review virtual machine hardware and network settings.
+- Configure a manual IPv4 address.
+- Identify the default gateway and DNS server.
+- Inspect network interfaces and routing information.
+- Test gateway and external network connectivity.
+- Verify DNS resolution.
+- Save a virtual machine snapshot.
 
-⚠️ **Note:** I only use this lab on systems I own or have permission to test.
-Testing other people's systems without permission is illegal.
+## 🧰 Tools and Environment
 
----
-
-## 🏗️ Lab Layout
-
-```
- My Laptop (Windows 11 + VirtualBox)
-        │
-        └── NatNetwork  (10.0.0.0/24)
-               │
-               ├── Gateway / DNS ......... 10.0.0.1
-               ├── Kali Linux VM ......... 10.0.0.2
-               └── Future target VMs ..... (to be added)
-```
-
----
-
-## ⚙️ My Lab Configuration
-
-| Component | Details |
+| Component | Configuration |
 |---|---|
-| Laptop | ASUS TUF Gaming F16 (FX607VBR) |
-| Host OS | Windows 11 Home, version 25H2 |
-| Processor | Intel Core 5 210H, 2.20 GHz |
-| RAM | 16 GB |
-| Graphics | NVIDIA GeForce RTX 3050 A (4 GB) |
-| Storage | 954 GB |
-| Security OS | Kali Linux 2026.3 (Rolling, x64) |
-| Kali VM RAM | 2048 MB |
-| Kali VM CPUs | 2 |
-| Kali VM disk | 80 GB (VDI) |
-| Network type | NAT Network (`NatNetwork`) |
-| Network range | 10.0.0.0/24 |
-| Kali IP address | 10.0.0.2/24 |
-| Gateway | 10.0.0.1 |
-| DNS server | 10.0.0.1 |
+| Host computer | Windows Laptop |
+| Processor | Intel Core 5 210H (2.20 GHz) |
+| Installed RAM | 16 GB |
+| Graphics | NVIDIA GeForce RTX 3050 (4 GB), Intel Graphics |
+| Virtualization software | Oracle VirtualBox |
+| Guest OS | Kali Linux Rolling 2026.3 (x64) |
+| VM allocated memory | 2048 MB (2 GB) |
+| VM processors | 2 |
+| Virtual disk | 80.09 GB |
+| Video memory | 128 MB |
+| Network attachment | NAT Network |
+| NAT network name | NatNetwork |
+| NAT network IPv4 prefix | 10.0.0.0/24 |
 
-![Laptop specs](screenshots/01-laptop-specs.png)
+### Host Laptop Specifications
 
----
+The host laptop has an Intel Core 5 210H processor and 16 GB of installed RAM.
 
-## 🪜 Setup Steps
-
-### Step 1: Create the NAT Network
-In VirtualBox I opened the Network manager and created a NAT Network.
-
-```
-Name:        NatNetwork
-IPv4 Prefix: 10.0.0.0/24
-DHCP:        Enabled
-IPv6:        Disabled
-```
-
-I chose a NAT Network because VMs on the same NAT Network can talk to each
-other and can still reach the internet. This lets me add more machines to
-the lab later.
-
-![NAT Network](screenshots/02-virtualbox-nat-network.png)
-
-### Step 2: Set up the Kali Linux VM
-I used the pre-built Kali Linux VirtualBox image from the official Kali website
-and gave the VM these resources:
-
-```
-RAM:        2048 MB
-Processors: 2
-Video:      VMSVGA, 128 MB
-Disk:       80 GB
-```
-
-![Kali VM details](screenshots/03-kali-vm-details.png)
-
-### Step 3: Connect Kali to the NAT Network
-In the VM settings, under Network, Adapter 1:
-
-```
-Attached to:  NAT Network
-Name:         NatNetwork
-Adapter Type: Intel PRO/1000 MT Desktop
-```
-
-![Kali network adapter](screenshots/04-kali-vm-network-adapter.png)
-
-### Step 4: Start Kali Linux
-Kali booted to its desktop without problems.
-
-![Kali desktop](screenshots/05-kali-desktop.png)
-
-### Step 5: Set a static IP address
-I opened the network connection editor ("Wired connection 1") and set the
-IPv4 method to Manual:
-
-```
-Address: 10.0.0.2
-Netmask: 24
-Gateway: 10.0.0.1
-DNS:     10.0.0.1
-```
-
-A fixed IP makes the lab easier to document and to reuse in future exercises.
-
-![Static IP settings](screenshots/06-static-ip-settings.png)
-
-### Step 6: Take a snapshot
-I took a VirtualBox snapshot named **Network Walks** so I can restore the
-VM if I break something later.
-
-![Snapshot](screenshots/13-snapshot.png)
+![Host Laptop Specifications](screenshots/13-host-laptop-specifications.png)
 
 ---
 
-## 🔎 Testing the Lab
+## 🏗️ Lab Architecture
 
-| Test | Command | Result |
-|---|---|---|
-| Check my IP | `ip addr` | `eth0` has 10.0.0.2/24 |
-| Check routes | `ip route` | Default route via 10.0.0.1 on eth0 |
-| Ping the gateway | `ping -c 4 10.0.0.1` | 4 sent, 4 received, 0% loss |
-| Ping the internet | `ping -c 4 8.8.8.8` | 4 sent, 4 received, 0% loss |
-| Check DNS config | `cat /etc/resolv.conf` and `nmcli device show` | Nameserver and DNS are 10.0.0.1 |
-| Test DNS lookup | `nslookup google.com` | google.com resolved to IP addresses |
+The Kali Linux operating system runs as a guest virtual machine inside Oracle VirtualBox on the Windows host laptop.
 
-**IP address**
-![ip addr](screenshots/07-ip-addr.png)
+Its virtual network adapter is connected to the VirtualBox NAT Network named `NatNetwork`.
 
-**Routing table**
-![ip route](screenshots/08-ip-route.png)
+```text
+Windows Host Laptop
+        |
+        v
+Oracle VirtualBox
+        |
+        v
+Kali Linux Virtual Machine
+        |
+        v
+VirtualBox NAT Network
+        |
+        v
+Gateway / External Network
+```
 
-**Ping to gateway**
-![Ping gateway](screenshots/09-ping-gateway.png)
-
-**Ping to internet**
-![Ping internet](screenshots/10-ping-internet.png)
-
-**DNS configuration**
-![DNS config](screenshots/12-dns-config.png)
-
-**DNS lookup**
-![DNS lookup](screenshots/11-dns-lookup.png)
+![Oracle VirtualBox Manager](screenshots/01-virtualbox-manager.png)
 
 ---
 
-## 🐞 Problems I Faced and How I Fixed Them
+## ⚙️ Virtual Machine Configuration
 
-### Problem 1: (write your real problem here)
-**What happened:** (your own words)
-**How I fixed it:** (your own words)
+The Kali Linux virtual machine was configured with:
+
+- **RAM:** 2048 MB
+- **Processors:** 2
+- **Virtual disk:** 80.09 GB
+- **Video memory:** 128 MB
+- **Network adapter:** NAT Network
+- **Network name:** NatNetwork
+
+![Virtual Machine Overview](screenshots/02-virtual-machine-overview.png)
+
+### VirtualBox Network Adapter
+
+The virtual machine's Adapter 1 is attached to the `NatNetwork` NAT Network. The virtual cable is connected.
+
+![VirtualBox Network Adapter Settings](screenshots/03-virtualbox-network-adapter.png)
+
+### NAT Network Details
+
+The VirtualBox NAT Network is configured with the IPv4 prefix `10.0.0.0/24`. Its DHCP server is enabled. In this lab, the Kali guest's IPv4 address was configured manually.
+
+---
+
+## 🪜 Lab Setup and Configuration
+
+### Step 1: Start Kali Linux
+
+I started the Kali Linux virtual machine from Oracle VirtualBox and opened the Kali desktop.
+
+![Kali Linux Desktop](screenshots/04-kali-linux-desktop.png)
+
+### Step 2: Configure IPv4 Settings
+
+I configured the wired connection with the following manual IPv4 settings:
+
+| Setting | Value |
+|---|---|
+| Method | Manual |
+| IPv4 address | `10.0.0.2` |
+| Prefix length | `24` |
+| Default gateway | `10.0.0.1` |
+| DNS server | `10.0.0.1` |
+
+![Kali Manual IPv4 Settings](screenshots/05-kali-manual-ipv4-settings.png)
+
+### Step 3: Verify the IP Address
+
+I used the `ip addr` command to inspect network interfaces and confirm the address assigned to `eth0`.
+
+```bash
+ip addr
+```
+<img width="1917" height="1140" alt="Ip configuration" src="https://github.com/user-attachments/assets/b31fa6fb-6b75-4b91-abea-9b0e8818aab2" />
+
+
+The output shows:
+
+- Interface: `eth0`
+- IPv4 address: `10.0.0.2/24`
+
+![Kali IP Address Output](screenshots/06-kali-ip-address.png)
+
+### Step 4: Check the Routing Table
+
+I used the following command to view the routing table:
+
+```bash
+ip route
+```
+<img width="1917" height="747" alt="Routing table" src="https://github.com/user-attachments/assets/b22fb282-e90c-452d-bac9-da81daf59a42" />
+
+
+The output shows the default route through `10.0.0.1` using interface `eth0`.
+
+![Kali Routing Table](screenshots/07-kali-routing-table.png)
+
+### Step 5: Verify DNS Configuration
+
+I checked the resolver configuration:
+
+```bash
+cat /etc/resolv.conf
+```
+<img width="1917" height="1141" alt="DNS configuration" src="https://github.com/user-attachments/assets/b4cf56a1-144d-47d1-a9a9-bd77b4dfdf56" />
+
+I also inspected the active connection's gateway and DNS information:
+
+```bash
+nmcli device show | grep -E 'GENERAL.DEVICE|IP4.DNS|IP4.GATEWAY'
+```
+
+The captured output shows `10.0.0.1` as the gateway and DNS server.
+
+![DNS and Gateway Configuration](screenshots/08-kali-dns-configuration.png)
+
+### Step 6: Test Gateway Connectivity
+
+I sent four ICMP echo requests to the configured gateway:
+
+```bash
+ping -c 4 10.0.0.1
+```
+
+The screenshot shows **4 packets transmitted, 4 received, and 0% packet loss**, confirming that the gateway responded to the test.
+
+![Gateway Ping Test](screenshots/09-gateway-ping-test.png)
+
+### Step 7: Test External IP Connectivity
+
+I tested connectivity to the public IP address `8.8.8.8`:
+
+```bash
+ping -c 4 8.8.8.8
+```
+
+The screenshot shows **4 packets transmitted, 4 received, and 0% packet loss**.
+
+![Internet Connectivity Test](screenshots/10-internet-connectivity-test.png)
+
+### Step 8: Verify DNS Resolution
+
+I used `nslookup` to check whether the DNS server could resolve `google.com`:
+
+```bash
+nslookup google.com
+```
+
+The output identifies the DNS server as `10.0.0.1` and returns IP addresses for `google.com`.
+
+![DNS Resolution Output](screenshots/11-dns-resolution-test.png)
+
+---
+
+## ✅ Verification Summary
+
+| Verification | Result |
+|---|---|
+| Kali network interface | `eth0` is up |
+| Kali IPv4 address | `10.0.0.2/24` |
+| Default gateway | `10.0.0.1` |
+| DNS server | `10.0.0.1` |
+| Gateway ping | 4 received, 0% packet loss |
+| External IP ping | 4 received, 0% packet loss |
+| DNS lookup | `google.com` resolved successfully |
+
+These results document successful gateway reachability, external IP connectivity, and DNS resolution at the time the screenshots were captured.
+
+---
+
+## 💾 Virtual Machine Snapshot
+
+I saved a VirtualBox snapshot named **Network Walks** to preserve a point-in-time state of the virtual machine.
+
+![VirtualBox Snapshot](screenshots/12-virtualbox-snapshot.png)
 
 ---
 
 ## 💡 What I Learned
 
-1. **NAT vs NAT Network:** a NAT Network lets several VMs share one private
-   network and still reach the internet, which is what a multi-machine lab needs.
-2. **Static IPs:** I learned to set an IP address, netmask, gateway and DNS
-   by hand in Kali and to check them with `ip addr` and `ip route`.
-3. **Testing in layers:** I tested my gateway first, then the internet, then
-   DNS, so I know exactly which part works.
-4. **Snapshots:** taking a snapshot early gives me a safe point to return to.
-5. **Documentation:** writing down commands, results and screenshots is part of
-   doing a project properly.
+Through this practical lab, I gained experience with:
+
+1. **Virtualization:** Running Kali Linux as a guest operating system in Oracle VirtualBox.
+2. **Virtual Networking:** Understanding how a NAT Network connects a virtual machine to an external network.
+3. **IPv4 Configuration:** Setting an IP address, prefix length, gateway, and DNS server manually.
+4. **Linux Network Commands:** Using `ip addr`, `ip route`, and `nmcli` to inspect network configuration.
+5. **Connectivity Testing:** Using `ping` to test gateway and external IP reachability.
+6. **DNS Troubleshooting:** Using `nslookup` and checking `/etc/resolv.conf`.
+7. **Snapshots:** Saving a VirtualBox snapshot as a recovery point.
 
 ---
 
-## 🔐 Ethical Use
+## 🔗 Tools and Resources
 
-This lab is for learning only. I only test systems that I own or have
-permission to test.
-
----
-
-## 🔗 Tools and Downloads
-
-- VirtualBox: https://virtualbox.org/wiki/Downloads
-- Kali Linux: https://kali.org/get-kali
+- [Oracle VirtualBox](https://www.virtualbox.org/)
+- [Kali Linux](https://www.kali.org/)
+- [Kali Linux Documentation](https://www.kali.org/docs/)
+- [Linux IP Command Manual](https://man7.org/linux/man-pages/man8/ip.8.html)
 
 ---
 
 ## 👤 Author
 
-**Saloni Kakkar**
-B.Tech CSE student, Lovely Professional University
-GitHub: https://github.com/Saloni21-Bit
-LinkedIn: (add your link)
+**Saloni Kakkar**  
+B.Tech – Computer Science and Engineering (Cybersecurity)  
 
-**Program:** NetworkWalks | **Week:** 01 | **Project:** Cybersecurity & Pentesting Lab Setup
+
+
+---
+
+*Learning networking and cybersecurity through practical, documented lab work.*
