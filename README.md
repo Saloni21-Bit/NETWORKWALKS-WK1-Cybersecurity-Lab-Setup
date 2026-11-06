@@ -266,8 +266,9 @@ Through this practical lab, I gained experience with:
 **Saloni Kakkar**  
 B.Tech – Computer Science and Engineering (Cybersecurity)  
 
-
-
 ---
+
+📌 Project Information
+Program Name: Cybersecurity at Networkwalks | Week: 01 | Project: Cybersecurity & Pentesting Lab Setup | Repository: GitHub
 
 *Learning networking and cybersecurity through practical, documented lab work.*
