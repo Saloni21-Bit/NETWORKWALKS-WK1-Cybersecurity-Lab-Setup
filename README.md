@@ -49,7 +49,8 @@ All screenshots in this repository are from my own lab setup.
 
 The host laptop has an Intel Core 5 210H processor and 16 GB of installed RAM.
 
-![Host Laptop Specifications](screenshots/13-host-laptop-specifications.png)
+<img width="1240" height="277" alt="image" src="https://github.com/user-attachments/assets/e73791bd-d7ad-480b-b7e0-c708b08c14a2" />
+
 
 ---
 
@@ -75,10 +76,6 @@ VirtualBox NAT Network
 Gateway / External Network
 ```
 
-![Oracle VirtualBox Manager](screenshots/01-virtualbox-manager.png)
-
----
-
 ## ⚙️ Virtual Machine Configuration
 
 The Kali Linux virtual machine was configured with:
@@ -90,13 +87,13 @@ The Kali Linux virtual machine was configured with:
 - **Network adapter:** NAT Network
 - **Network name:** NatNetwork
 
-![Virtual Machine Overview](screenshots/02-virtual-machine-overview.png)
 
 ### VirtualBox Network Adapter
 
 The virtual machine's Adapter 1 is attached to the `NatNetwork` NAT Network. The virtual cable is connected.
 
-![VirtualBox Network Adapter Settings](screenshots/03-virtualbox-network-adapter.png)
+<img width="1912" height="1157" alt="VirtualBox Setting" src="https://github.com/user-attachments/assets/10ac120a-5cfd-4611-bb5d-e722ac966334" />
+
 
 ### NAT Network Details
 
@@ -109,8 +106,8 @@ The VirtualBox NAT Network is configured with the IPv4 prefix `10.0.0.0/24`. Its
 ### Step 1: Start Kali Linux
 
 I started the Kali Linux virtual machine from Oracle VirtualBox and opened the Kali desktop.
+<img width="1897" height="1141" alt="Kali Linux Desktop" src="https://github.com/user-attachments/assets/98aa1768-2e24-4992-b1b9-5f935dc1fa65" />
 
-![Kali Linux Desktop](screenshots/04-kali-linux-desktop.png)
 
 ### Step 2: Configure IPv4 Settings
 
@@ -124,7 +121,8 @@ I configured the wired connection with the following manual IPv4 settings:
 | Default gateway | `10.0.0.1` |
 | DNS server | `10.0.0.1` |
 
-![Kali Manual IPv4 Settings](screenshots/05-kali-manual-ipv4-settings.png)
+<img width="1917" height="1145" alt="Kali Network Settings" src="https://github.com/user-attachments/assets/52add116-eb5b-4edc-9aa1-e5b3b5972574" />
+
 
 ### Step 3: Verify the IP Address
 
@@ -133,15 +131,14 @@ I used the `ip addr` command to inspect network interfaces and confirm the addre
 ```bash
 ip addr
 ```
-<img width="1917" height="1140" alt="Ip configuration" src="https://github.com/user-attachments/assets/b31fa6fb-6b75-4b91-abea-9b0e8818aab2" />
-
-
 The output shows:
 
 - Interface: `eth0`
 - IPv4 address: `10.0.0.2/24`
 
-![Kali IP Address Output](screenshots/06-kali-ip-address.png)
+<img width="1917" height="1140" alt="Ip configuration" src="https://github.com/user-attachments/assets/b31fa6fb-6b75-4b91-abea-9b0e8818aab2" />
+
+
 
 ### Step 4: Check the Routing Table
 
@@ -150,12 +147,10 @@ I used the following command to view the routing table:
 ```bash
 ip route
 ```
-<img width="1917" height="747" alt="Routing table" src="https://github.com/user-attachments/assets/b22fb282-e90c-452d-bac9-da81daf59a42" />
-
-
 The output shows the default route through `10.0.0.1` using interface `eth0`.
 
-![Kali Routing Table](screenshots/07-kali-routing-table.png)
+<img width="1917" height="747" alt="Routing table" src="https://github.com/user-attachments/assets/0a567848-f84d-4ba1-9caa-75c1b649af65" />
+
 
 ### Step 5: Verify DNS Configuration
 
@@ -174,7 +169,7 @@ nmcli device show | grep -E 'GENERAL.DEVICE|IP4.DNS|IP4.GATEWAY'
 
 The captured output shows `10.0.0.1` as the gateway and DNS server.
 
-![DNS and Gateway Configuration](screenshots/08-kali-dns-configuration.png)
+<img width="1917" height="1141" alt="DNS configuration" src="https://github.com/user-attachments/assets/b2f0ac56-d192-4314-8c73-513c26a56aa6" />
 
 ### Step 6: Test Gateway Connectivity
 
@@ -186,7 +181,8 @@ ping -c 4 10.0.0.1
 
 The screenshot shows **4 packets transmitted, 4 received, and 0% packet loss**, confirming that the gateway responded to the test.
 
-![Gateway Ping Test](screenshots/09-gateway-ping-test.png)
+<img width="1916" height="1142" alt="Gateway test ping" src="https://github.com/user-attachments/assets/7a97afed-dfa4-41ef-b847-314bab8b5c2e" />
+
 
 ### Step 7: Test External IP Connectivity
 
@@ -198,7 +194,8 @@ ping -c 4 8.8.8.8
 
 The screenshot shows **4 packets transmitted, 4 received, and 0% packet loss**.
 
-![Internet Connectivity Test](screenshots/10-internet-connectivity-test.png)
+<img width="1917" height="1145" alt="Internet Connectivity" src="https://github.com/user-attachments/assets/f4eff7e8-1b4a-4ede-8506-88b484a575d6" />
+
 
 ### Step 8: Verify DNS Resolution
 
@@ -210,7 +207,7 @@ nslookup google.com
 
 The output identifies the DNS server as `10.0.0.1` and returns IP addresses for `google.com`.
 
-![DNS Resolution Output](screenshots/11-dns-resolution-test.png)
+<img width="1917" height="1140" alt="DNS resolution" src="https://github.com/user-attachments/assets/ee2934e0-e70c-4136-96aa-2e65ec3c9b1e" />
 
 ---
 
@@ -234,7 +231,8 @@ These results document successful gateway reachability, external IP connectivity
 
 I saved a VirtualBox snapshot named **Network Walks** to preserve a point-in-time state of the virtual machine.
 
-![VirtualBox Snapshot](screenshots/12-virtualbox-snapshot.png)
+<img width="1917" height="1142" alt="Snapshots" src="https://github.com/user-attachments/assets/f41543da-4005-4656-b8bb-0de09bf43021" />
+
 
 ---
 
