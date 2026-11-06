@@ -169,7 +169,8 @@ nmcli device show | grep -E 'GENERAL.DEVICE|IP4.DNS|IP4.GATEWAY'
 
 The captured output shows `10.0.0.1` as the gateway and DNS server.
 
-<img width="1917" height="1141" alt="DNS configuration" src="https://github.com/user-attachments/assets/b2f0ac56-d192-4314-8c73-513c26a56aa6" />
+<img width="1917" height="1141" alt="DNS configuration" src="https://github.com/user-attachments/assets/6ddd252f-29c7-4b90-9545-dc552e4b22bb" />
+
 
 ### Step 6: Test Gateway Connectivity
 
@@ -194,7 +195,7 @@ ping -c 4 8.8.8.8
 
 The screenshot shows **4 packets transmitted, 4 received, and 0% packet loss**.
 
-<img width="1917" height="1145" alt="Internet Connectivity" src="https://github.com/user-attachments/assets/f4eff7e8-1b4a-4ede-8506-88b484a575d6" />
+<img width="1917" height="1145" alt="Internet Connectivity" src="https://github.com/user-attachments/assets/8d8a3f2f-6a4c-42d1-a82e-3d8188fb3174" />
 
 
 ### Step 8: Verify DNS Resolution
@@ -207,7 +208,8 @@ nslookup google.com
 
 The output identifies the DNS server as `10.0.0.1` and returns IP addresses for `google.com`.
 
-<img width="1917" height="1140" alt="DNS resolution" src="https://github.com/user-attachments/assets/ee2934e0-e70c-4136-96aa-2e65ec3c9b1e" />
+<img width="1917" height="1140" alt="DNS resolution" src="https://github.com/user-attachments/assets/b69387e6-f3df-47d0-ac6f-da9fd27ad58f" />
+
 
 ---
 
