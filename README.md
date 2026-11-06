@@ -1,284 +1,229 @@
 # NETWORKWALKS-WK1-Cybersecurity-Lab-Setup
-My home cybersecurity lab with VirtualBox, Kali Linux and a vulnerable VM.
-# 🔐 Cybersecurity & Penetration Testing Lab Setup
+# 🖥️ Cybersecurity & Pentesting Lab Setup
 
-*Building a virtual lab, understanding networks, and exploring cybersecurity through hands-on practice.*
+**NetworkWalks | Week 1 | Tools: VirtualBox + Kali Linux**
 
-## 📌 1. Project Overview
+---
 
-As part of my Week 1 Cybersecurity Internship at **NETWORKWALKS**, I worked on setting up a virtual cybersecurity and penetration testing lab using **Oracle VirtualBox**.
+📌 About This Project
 
-The main idea behind this project was to create a controlled virtual environment where multiple operating systems could run together and communicate over a virtual network.
+In this project I built a safe virtual hacking lab on my own laptop using
+VirtualBox and Kali Linux. Everything runs inside a virtual machine, so I can
+practise security tools without putting my real computer or my home network
+at risk.
 
-For this setup, I worked with **Kali Linux, Windows 10, and Android virtual machines**. I configured the virtual network, checked IP addressing, verified DNS resolution, tested network connectivity, and explored snapshot management.
+The lab runs on a private virtual network (a VirtualBox NAT Network), so I can
+add more machines later and use them as practice targets.
 
-This practical exercise helped me understand how virtual machines communicate with each other and how networking concepts are applied in a cybersecurity environment.
+---
 
-## 🎯 2. Objectives of the Project
+ 🎯 What I Wanted to Achieve
 
-The major objectives of this project were:
+- Install VirtualBox on my laptop
+- Create a private NAT Network for the lab
+- Set up Kali Linux as a virtual machine
+- Give the Kali VM a fixed (static) IP address
+- Check that the network, internet and DNS all work
+- Save a snapshot so I can go back to a clean setup
+- Document every step with my own screenshots
 
-- 🐉 To configure Kali Linux in Oracle VirtualBox.
-- 🌐 To understand different virtual networking modes available in VirtualBox.
-- ⚙️ To create and configure a NAT Network.
-- 💻 To connect multiple virtual machines to the same network.
-- 📡 To understand IP addressing, subnetting, and default gateways.
-- 🔎 To verify routing information and DNS resolution.
-- 🧪 To test network connectivity using basic networking commands.
-- 📸 To create a virtual machine snapshot for recovery purposes.
+---
 
-## 🌐 3. Network Configuration
+## 🛡️ Why Build a Lab?
 
-An important part of this project was configuring the virtual network so that different virtual machines could communicate with each other.
+A lab gives me a safe place to practise things like:
 
-### 🔄 3.1 Understanding NAT and NAT Network
+- Network scanning and port scanning
+- Vulnerability checking
+- Packet analysis
+- Web security testing
+- Trying out security tools
 
-While working with Oracle VirtualBox, I explored the difference between NAT and NAT Network.
+⚠️ **Note:** I only use this lab on systems I own or have permission to test.
+Testing other people's systems without permission is illegal.
 
-**🔹 NAT (Network Address Translation)**
+---
 
-NAT allows a virtual machine to access external networks through the host machine. However, virtual machines using separate individual NAT connections are not automatically placed on the same private network for direct communication.
+## 🏗️ Lab Layout
 
-**🔹 NAT Network**
-
-NAT Network allows multiple virtual machines connected to the same NAT Network to communicate with each other while also providing external network access.
-
-For this project, I selected **NAT Network** because the objective was to connect Kali Linux, Windows 10, and Android virtual machines within a common virtual network.
-
-### ⚙️ 3.2 Creating a NAT Network
-
-The following configuration process was performed:
-
-1. Opened Oracle VirtualBox.
-2. Navigated to the Network Manager section.
-3. Created a new NAT Network.
-4. Configured the network settings.
-5. Enabled DHCP where applicable.
-6. Connected the required virtual machines to the same NAT Network.
-
-**📋 Network Configuration Details**
-
-| Parameter        | Configuration |
-| Network Mode     | NAT Network |
-| Network Name     | As configured in VirtualBox |
-| DHCP             | Enabled where configured |
-| Virtual Machines | Kali Linux, Windows 10, Android |
-
-### 💻 3.3 Connecting Virtual Machines
-
-After creating the NAT Network, I configured the network adapter settings of the virtual machines.
-
-The same NAT Network was selected for the required virtual machines to allow communication between them.
-
-The connected systems included:
-
-- 🐉 **Kali Linux:** Used as the primary cybersecurity testing environment.
-- 🪟 **Windows 10:** Used as a secondary operating system for connectivity testing.
-- 📱 **Android:** Included to understand connectivity between different operating system environments.
-
-## 🛠️ 4. Implementation Procedure
-
-This section explains the practical steps I followed while setting up the virtual cybersecurity lab.
-
-### 🐉 Step 1: Setting Up Kali Linux
-
-I started by configuring Kali Linux in Oracle VirtualBox.
-
-After launching the virtual machine, I checked whether the operating system was working properly and verified its network connectivity.
-
-Kali Linux was selected as the primary environment for performing networking-related tasks and exploring cybersecurity tools.
-
-### 🔧 Step 2: Configuring Network Settings
-
-Next, I configured the network adapter of Kali Linux and connected it to the previously created NAT Network.
-
-After applying the configuration, I checked the network interface to verify whether the virtual machine had received the required network settings.
-
-**Command Used:**
-
-```bash
-ip addr
+```
+ My Laptop (Windows 11 + VirtualBox)
+        │
+        └── NatNetwork  (10.0.0.0/24)
+               │
+               ├── Gateway / DNS ......... 10.0.0.1
+               ├── Kali Linux VM ......... 10.0.0.2
+               └── Future target VMs ..... (to be added)
 ```
 
-This command displays the available network interfaces along with their assigned IP addresses.
+---
 
-### 🌍 Step 3: Checking IP Configuration
+## ⚙️ My Lab Configuration
 
-To understand the network configuration, I checked the assigned IP address and network interface details.
+| Component | Details |
+|---|---|
+| Laptop | ASUS TUF Gaming F16 (FX607VBR) |
+| Host OS | Windows 11 Home, version 25H2 |
+| Processor | Intel Core 5 210H, 2.20 GHz |
+| RAM | 16 GB |
+| Graphics | NVIDIA GeForce RTX 3050 A (4 GB) |
+| Storage | 954 GB |
+| Security OS | Kali Linux 2026.3 (Rolling, x64) |
+| Kali VM RAM | 2048 MB |
+| Kali VM CPUs | 2 |
+| Kali VM disk | 80 GB (VDI) |
+| Network type | NAT Network (`NatNetwork`) |
+| Network range | 10.0.0.0/24 |
+| Kali IP address | 10.0.0.2/24 |
+| Gateway | 10.0.0.1 |
+| DNS server | 10.0.0.1 |
 
-**Command Used:**
+![Laptop specs](screenshots/01-laptop-specs.png)
 
-```bash
-ip a
+---
+
+## 🪜 Setup Steps
+
+### Step 1: Create the NAT Network
+In VirtualBox I opened the Network manager and created a NAT Network.
+
+```
+Name:        NatNetwork
+IPv4 Prefix: 10.0.0.0/24
+DHCP:        Enabled
+IPv6:        Disabled
 ```
 
-This helped me identify the active network interface and verify its IP configuration.
+I chose a NAT Network because VMs on the same NAT Network can talk to each
+other and can still reach the internet. This lets me add more machines to
+the lab later.
 
-Understanding IP addressing is important because it helps determine how devices identify and communicate with each other over a network.
+![NAT Network](screenshots/02-virtualbox-nat-network.png)
 
-### 🛣️ Step 4: Verifying the Routing Table
+### Step 2: Set up the Kali Linux VM
+I used the pre-built Kali Linux VirtualBox image from the official Kali website
+and gave the VM these resources:
 
-I checked the routing table to understand how network traffic was being directed.
-
-**Command Used:**
-
-```bash
-ip route
+```
+RAM:        2048 MB
+Processors: 2
+Video:      VMSVGA, 128 MB
+Disk:       80 GB
 ```
 
-The routing table helped me identify the default gateway and understand how the virtual machine could communicate with other networks.
+![Kali VM details](screenshots/03-kali-vm-details.png)
 
-It also helped me understand the role of routing in sending data to the correct destination.
+### Step 3: Connect Kali to the NAT Network
+In the VM settings, under Network, Adapter 1:
 
-### 📡 Step 5: Testing Gateway Connectivity
-
-After checking the IP configuration and routing table, I tested connectivity to the default gateway.
-
-**Command Used:**
-
-```bash
-ping <gateway-ip>
+```
+Attached to:  NAT Network
+Name:         NatNetwork
+Adapter Type: Intel PRO/1000 MT Desktop
 ```
 
-This test helped verify whether Kali Linux could communicate with the virtual network gateway.
+![Kali network adapter](screenshots/04-kali-vm-network-adapter.png)
 
-Successful responses indicate that the gateway is reachable from the virtual machine.
+### Step 4: Start Kali Linux
+Kali booted to its desktop without problems.
 
-### 🌐 Step 6: Testing External Network Connectivity
+![Kali desktop](screenshots/05-kali-desktop.png)
 
-I then checked whether the virtual machine could reach an external IP address.
+### Step 5: Set a static IP address
+I opened the network connection editor ("Wired connection 1") and set the
+IPv4 method to Manual:
 
-**Command Used:**
-
-```bash
-ping 8.8.8.8
+```
+Address: 10.0.0.2
+Netmask: 24
+Gateway: 10.0.0.1
+DNS:     10.0.0.1
 ```
 
-This helped verify external network connectivity without depending on DNS resolution.
+A fixed IP makes the lab easier to document and to reuse in future exercises.
 
-It was useful for understanding the difference  between IP connectivity and domain name resolution.
+![Static IP settings](screenshots/06-static-ip-settings.png)
 
-🔎 Step 7: Verifying DNS Resolution
+### Step 6: Take a snapshot
+I took a VirtualBox snapshot named **Network Walks** so I can restore the
+VM if I break something later.
 
-To check whether domain names were resolving correctly, I used:
+![Snapshot](screenshots/13-snapshot.png)
 
-Command Used:
+---
 
-ping google.com
+## 🔎 Testing the Lab
 
-This helped me understand how DNS translates human-readable domain names into IP addresses.
+| Test | Command | Result |
+|---|---|---|
+| Check my IP | `ip addr` | `eth0` has 10.0.0.2/24 |
+| Check routes | `ip route` | Default route via 10.0.0.1 on eth0 |
+| Ping the gateway | `ping -c 4 10.0.0.1` | 4 sent, 4 received, 0% loss |
+| Ping the internet | `ping -c 4 8.8.8.8` | 4 sent, 4 received, 0% loss |
+| Check DNS config | `cat /etc/resolv.conf` and `nmcli device show` | Nameserver and DNS are 10.0.0.1 |
+| Test DNS lookup | `nslookup google.com` | google.com resolved to IP addresses |
 
-It also provided a basic way to check whether DNS resolution was functioning properly.
+**IP address**
+![ip addr](screenshots/07-ip-addr.png)
 
-🪟 Step 8: Connecting Windows 10 and Android
+**Routing table**
+![ip route](screenshots/08-ip-route.png)
 
-After configuring Kali Linux, I connected the Windows 10 and Android virtual machines to the same NAT Network.
+**Ping to gateway**
+![Ping gateway](screenshots/09-ping-gateway.png)
 
-I checked their network configurations and performed connectivity tests where supported.
+**Ping to internet**
+![Ping internet](screenshots/10-ping-internet.png)
 
-This helped me understand how different virtual machines can operate within a shared virtual network.
+**DNS configuration**
+![DNS config](screenshots/12-dns-config.png)
 
-📶 Step 9: Testing Network Connectivity Using Ping
+**DNS lookup**
+![DNS lookup](screenshots/11-dns-lookup.png)
 
-The ping command was used to test communication between systems.
+---
 
-Command Used:
+## 🐞 Problems I Faced and How I Fixed Them
 
-ping <target-ip>
+### Problem 1: (write your real problem here)
+**What happened:** (your own words)
+**How I fixed it:** (your own words)
 
-It sends ICMP echo requests to the target and checks whether responses are received.
+---
 
-This is one of the basic methods used in networking to identify connectivity issues and verify communication between devices.
+## 💡 What I Learned
 
-📸 Step 10: Creating a Kali Linux Snapshot
+1. **NAT vs NAT Network:** a NAT Network lets several VMs share one private
+   network and still reach the internet, which is what a multi-machine lab needs.
+2. **Static IPs:** I learned to set an IP address, netmask, gateway and DNS
+   by hand in Kali and to check them with `ip addr` and `ip route`.
+3. **Testing in layers:** I tested my gateway first, then the internet, then
+   DNS, so I know exactly which part works.
+4. **Snapshots:** taking a snapshot early gives me a safe point to return to.
+5. **Documentation:** writing down commands, results and screenshots is part of
+   doing a project properly.
 
-Finally, I created a snapshot of the Kali Linux virtual machine.
+---
 
-A snapshot saves the current state of a virtual machine and provides a recovery point.
+## 🔐 Ethical Use
 
-This is particularly useful in cybersecurity labs because experiments and configuration changes can sometimes affect the working environment.
+This lab is for learning only. I only test systems that I own or have
+permission to test.
 
-Having a snapshot makes it easier to return to a previously saved state when needed.
+---
 
-🧪 5. Testing and Verification
+## 🔗 Tools and Downloads
 
-After completing the configuration, I performed several checks to verify the virtual lab setup.
+- VirtualBox: https://virtualbox.org/wiki/Downloads
+- Kali Linux: https://kali.org/get-kali
 
-The following commands were used during the testing process:
+---
 
-Command              | Purpose
-ip addr              | Check assigned IP addresses
-ip a                 | Display network interfaces
-ip route             | Verify routing information
-ping <gateway-ip>    | Test gateway connectivity
-ping 8.8.8.8         | Test external IP connectivity
-ping google.com      | Check DNS resolution
-ping <target-ip>     | Test communication with another system
+## 👤 Author
 
-These tests helped me understand whether the network configuration was working as expected.
+**Saloni Kakkar**
+B.Tech CSE student, Lovely Professional University
+GitHub: https://github.com/Saloni21-Bit
+LinkedIn: (add your link)
 
-⚠️ 6. Challenges Faced
-
-During the setup, I explored some common networking and virtual machine configuration issues.
-
-Some of the areas that required attention included:
-
-🔹 Understanding the difference between NAT and NAT Network.
-
-🔹 Ensuring all required virtual machines were connected to the correct network.
-
-🔹 Verifying IP address allocation.
-
-🔹 Understanding the default gateway and routing information.
-
-🔹 Checking DNS resolution separately from basic IP connectivity.
-
-🔹 Managing virtual machine states and snapshots.
-
-Working through these checks improved my understanding of network troubleshooting and virtual lab management.
-
-💡 7. Key Learnings
-
-This project provided practical exposure to several important networking concepts.
-
-Through this activity, I learned:
-
-🌐 How virtual machines work inside Oracle VirtualBox.
-
-🔄 How NAT and NAT Network differ.
-
-📡 How IP addresses are assigned to virtual machines.
-
-🛣️ How routing tables help direct network traffic.
-
-🔑 Why default gateways are important.
-
-🔎 How DNS resolution works.
-
-🧪 How to test network connectivity using the ping command.
-
-📸 How snapshots help maintain a safe virtual lab environment.
-
-Most importantly, I got the opportunity to apply networking concepts practically instead of only studying them theoretically.
-
-🧰 8. Tools and Technologies Used
-
-The following tools and technologies were used during this project:
-
-Tool / Technology             | Purpose
-Oracle VirtualBox             | Creating and managing virtual machines
-Kali Linux                    | Cybersecurity and networking practice
-Windows 10                    | Secondary operating system for connectivity testing
-Android VM                    | Exploring connectivity across operating systems
-Linux Terminal                | Executing networking commands
-Ping                          | Testing network connectivity
-
-# Author
-Name: Gurleen Kaur
-Field: Cybersecurity
-Project: Virtual Cybersecurity Lab Setup
-Platform: GitHub
-
-⭐ Learning by doing, growing with every challenge, and building a stronger foundation in cybersecurity.
-
-#Cybersecurity #NetworkWalks #KaliLinux #VirtualBox #Networking #EthicalHacking #LearningByDoing
+**Program:** NetworkWalks | **Week:** 01 | **Project:** Cybersecurity & Pentesting Lab Setup
